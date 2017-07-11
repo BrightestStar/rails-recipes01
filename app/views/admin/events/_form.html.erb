@@ -1,13 +1,14 @@
 <% if @event.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@event.errors.count, "error") %> prohibited this person from being saved:</h2>
+<div id="error_explanation">
+  <h2><%= pluralize(@event.errors.count, "error") %>
+    prohibited this person from being saved:</h2>
 
-    <ul>
+  <ul>
     <% @event.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+    <li><%= msg %></li>
     <% end %>
-    </ul>
-  </div>
+  </ul>
+</div>
 <% end %>
 
 <div class="form-group">
@@ -29,5 +30,13 @@
 <div class="form-group">
   <%= f.label :status %>
 
-  <%= f.select :status, Event::STATUS.map{ |s| [t(s, :scope => "event.status"), s] }, {}, :class => "form-control" %>
+  <div class="btn-group" data-toggle="buttons">
+    <% Event::STATUS.each do |status| %>
+    <label class="btn btn-default <%= (status == f.object.status)? 'active' : '' %>">
+      <%= f.radio_button :status, status %>
+      <%= t(status, :scope => "event.status") %>
+    </label>
+    <% end %>
+  </div>
+
 </div>
