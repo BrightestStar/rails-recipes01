@@ -8,3 +8,7 @@
       event:
         name: "活动名称"
         description: "描述"
+        status:
+          draft: 草稿
+          public: 公开
+          private: 私密
