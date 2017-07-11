@@ -1,4 +1,9 @@
 "zh-CN":
+  event:
+    status:
+      draft: 草稿
+      public: 公开
+      private: 私密
   event_list: 活动列表
   admin:
     event_list: 活动列表管理
@@ -8,7 +13,3 @@
       event:
         name: "活动名称"
         description: "描述"
-        status:
-          draft: 草稿
-          public: 公开
-          private: 私密
