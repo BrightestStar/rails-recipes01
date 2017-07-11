@@ -21,4 +21,6 @@ class Event < ApplicationRecord
    self.friendly_id ||= SecureRandom.uuid
   end
 
+  belongs_to :category, :optional => true
+
 end
