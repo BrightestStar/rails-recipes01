@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "events#index"
-    resources :events
+    resources :events do
+      collection do
+        post :bulk_update
+      end
+    end
     resources :users do
       resource :profile, :controller => "user_profiles"
     end
