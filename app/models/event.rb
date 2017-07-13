@@ -3,6 +3,8 @@ class Event < ApplicationRecord
   include RankedModel
   ranks :row_order
 
+  mount_uploader :logo, EventLogoUploader
+
   scope :only_public, -> { where( :status => "public") }
   scope :only_available, -> {where( :status => ["public", "private"] ) }
 
