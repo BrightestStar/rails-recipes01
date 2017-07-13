@@ -3,6 +3,9 @@ class Event < ApplicationRecord
   include RankedModel
   ranks :row_order
 
+  scope :only_public, -> { where( :status => "public") }
+  scope :only_available, -> {where( :status => ["public", "private"] ) }
+
 
   STATUS = ["draft", "public", "private"]
   validates_inclusion_of :status, :in => STATUS
