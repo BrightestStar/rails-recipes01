@@ -70,7 +70,10 @@ class Admin::EventsController < AdminController
     @event.row_order_position = params[:position]
     @event.save!
 
-    redirect_to admin_events_path
+    redirect_to do |format|
+      format.html { redirect_to admin_events_path }
+      format.json { render :json => { :message => "ok" }}
+    end
   end
 
   protected
