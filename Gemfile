@@ -31,6 +31,8 @@ gem 'jquery-ui-rails'
 
 gem 'kaminari'
 
+gem 'ransack'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
