@@ -15,13 +15,14 @@
   </thead>
   <tbody class="sortable">
     <% @events.each do |event| %>
-    <tr data-reorder-url="<% reorder_admin_event_path(event) %>">
+    <tr data-reorder-url="<%= reorder_admin_event_path(event) %>">
       <td>
         <%= check_box_tag "ids[]", event.id %>
       </td>
       <td>
         <span class="sortable_icon">☰</span>
-        <%= link_to event.name, admin_event_path(event) %>        
+        <%= link_to event.name, admin_event_path(event) %>
+        
       </td>
       <td>
         <%= link_to "置顶", reorder_admin_event_path(event, :position => :first), :method => :post, :class => "btn btn-default" %>
@@ -50,22 +51,24 @@
       }
     })
 
-    $( ".sortable" ).sortable({
-      axis: 'y',
-      items: 'tr',
-      cursor: 'move',
-      handler: ".sortable_icon",
-      stop: function(e, ui){
+    $(".sortable").sortable({
+      axis: 'y', // 限制只能上下拖拉
+      items: 'tr', // 拖拉整个 tr
+      cursor: 'move', // 变更拖拉时的 icon
+      handle: ".sortable_icon", // 限制只有点 ☰ 才能开始拖拉，砍掉这行的话，会是整个 tr 都可以进行拖拉，你可以试试看
+      stop: function (e, ui) { // 当拖拉结束时，会调用这个方法
         ui.item.children('td').effect('highlight', {}, 1000)
       },
-      update: function(e, ui) {
+      update: function (e, ui) { // 当拖拉结束并且 DOM 上的位置变更时，会调用这个方法
         reorder_url = ui.item.data('reorder-url')
-        position = ui.item.index()
+        position = ui.item.index() // 取得顺序
         $.ajax({
           type: 'POST',
           url: reorder_url,
           dataType: 'json',
-          data: { position: position }
+          data: {
+            position: position
+          }
         })
       }
     });
