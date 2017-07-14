@@ -6,6 +6,7 @@ class Registration < ApplicationRecord
   belongs_to :event
   belongs_to :ticket
   belongs_to :user, :optional => true
+  has_paper_trail
 
   scope :by_status, ->(s){ where( :status => s ) }
   scope :by_ticket, ->(t){ where( :ticket_id => t) }

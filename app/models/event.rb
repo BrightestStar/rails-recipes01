@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
 
+  has_paper_trail
+
   include RankedModel
   ranks :row_order
 
