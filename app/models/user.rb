@@ -4,6 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  ROLES = ["admin", "editor"]
+
+  def is_admin?
+    self.role == "admin"
+  end
+
+  def is_editor?
+    ["admin", "editor"].include?(self.role)
+  end
+
   def display_name
     self.email.split("@").first
   end
@@ -15,15 +25,5 @@ class User < ApplicationRecord
     accepts_nested_attributes_for :profile
 
   has_many :registrations
-
-  ROLES = ["admin", "editor"]
-
-  def is_admin?
-    self.role == "admin"
-  end
-
-  def is_editor?
-    ["admin", "editor"].include?(self.role)
-  end
 
 end
