@@ -1,5 +1,7 @@
 class Admin::UsersController < AdminController
 
+  before_action :require_admin!
+
   def index
     @users = User.includes(:groups).all
   end
@@ -21,7 +23,7 @@ class Admin::UsersController < AdminController
   protected
 
   def user_params
-    params.require(:user).permit(:email, :group_ids => [] )
+    params.require(:user).permit(:email, :role, :group_ids => [] )
   end
 
 end
