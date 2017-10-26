@@ -4,5 +4,5 @@ class ImportWorkerJob < ApplicationJob
   def perform(import_id)
     import = RegistrationImport.find(import_id)
     import.process!
-  endn
+  end
 end
